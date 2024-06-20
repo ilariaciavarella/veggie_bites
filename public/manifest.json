@@ -8,12 +8,12 @@
 			"type": "image/x-icon"
 		},
 		{
-			"src": "veggie_bites-logo_192.png",
+			"src": "veggie_bites-icon_192.png",
 			"type": "image/png",
 			"sizes": "192x192"
 		},
 		{
-			"src": "veggie_bites-logo_512.png",
+			"src": "veggie_bites-icon_512.png",
 			"type": "image/png",
 			"sizes": "512x512"
 		}
