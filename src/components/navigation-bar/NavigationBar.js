@@ -10,17 +10,17 @@ import logo from '../../assets/images/veggie_bites-logo_hor.svg'
 
 export default function NavigationBar() {
     return (
-        <Navbar expand='md' className='bg-light justify-content-center
+        <Navbar expand='md' className='bg-light justify-content-between
          shadow-sm px-3 py-1'>
-            <Navbar.Brand href='./'  >
+            <Navbar.Brand href='./' >
                 <img
-                    className='d-inline-block mw-100'
+                    className='d-block'
                     src={logo}
                     alt='Veggie Bites logo'
-                    height='72px'
+                    height='60px'
                 />
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls='basic-navbar-nav' className='ms-auto' />
+            <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end py-2'>
                 <Form inline className='d-flex gap-2'>
                     <InputGroup>
@@ -34,6 +34,6 @@ export default function NavigationBar() {
 
                 </Form>
             </Navbar.Collapse>
-        </Navbar>
+        </Navbar >
     )
 }
