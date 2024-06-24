@@ -10,19 +10,20 @@ import logo from '../../assets/images/veggie_bites-logo_hor.svg'
 
 export default function NavigationBar() {
     return (
-        <Navbar bg='tertiary' expand='md' className='shadow-sm px-3 py-1'>
-            <Navbar.Brand href='./'>
+        <Navbar expand='md' className='bg-light justify-content-center
+         shadow-sm px-3 py-1'>
+            <Navbar.Brand href='./' className='w-75'>
                 <img
-                    className='d-inline-block align-top'
+                    className='d-inline-block mw-100'
                     src={logo}
                     alt='Veggie Bites logo'
                     height='72px'
                 />
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls='basic-navbar-nav' />
-            <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end'>
+            <Navbar.Toggle aria-controls='basic-navbar-nav' className='ms-auto' />
+            <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end py-2 ms-auto'>
                 <Form inline>
-                    <Stack direction='horizontal' gap={2}>
+                    <Stack direction='horizontal' gap={2} >
                         <Form.Control
                             type='search'
                             placeholder='&ldquo;Carrot cake&rdquo;'
@@ -33,11 +34,5 @@ export default function NavigationBar() {
                 </Form>
             </Navbar.Collapse>
         </Navbar>
-
-        // <nav>
-        //     <a href='./'>
-        //         <img className='nav-logo' src={logo} alt='Veggie Bites logo' />
-        //     </a>
-        // </nav>
     )
 }

@@ -2,12 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import './App.scss';
 
-import Home from './pages/Home'
-import Results from './pages/Results'
-import Recipe from './pages/Recipe'
-import Error from './pages/Error'
+import Home from './pages/Home';
+import Results from './pages/Results';
+import Recipe from './pages/Recipe';
+import Error from './pages/Error';
 
-import NavigationBar from './components/navigation-bar/NavigationBar'
+import NavigationBar from './components/navigation-bar/NavigationBar';
+import Footer from './components/footer/Footer'
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,7 @@ function App() {
         <>
             <NavigationBar />
             <RouterProvider router={router} />
+            <Footer />
         </>
     );
 }

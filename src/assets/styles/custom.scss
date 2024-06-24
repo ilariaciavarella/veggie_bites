@@ -1,14 +1,13 @@
 $theme-colors: (
 	"primary": #8222a5,
 	"secondary": #f5564e,
-	"tertiary": #f8f6ee //
-	//   "success":    $success,
-	//   "info":       $info,
-	//   "warning":    $warning,
-	//   "danger":     $danger,
-	//   "light":      $light,
-	//   "dark":       $dark,,,
+	"tertiary": #f7a565,
+	"light": #f8f6ee,
+	"dark": #140519,
 );
+
+$body-color: #140519;
+$body-bg: #f8f6ee;
 
 $font-family-sans-serif: "DM Sans", "Roboto", "Oxygen", "Helvetica Neue",
 	sans-serif;
