@@ -1,0 +1,16 @@
+$theme-colors: (
+	"primary": #8222a5,
+	"secondary": #f5564e,
+	"tertiary": #f8f6ee //
+	//   "success":    $success,
+	//   "info":       $info,
+	//   "warning":    $warning,
+	//   "danger":     $danger,
+	//   "light":      $light,
+	//   "dark":       $dark,,,
+);
+
+$font-family-sans-serif: "DM Sans", "Roboto", "Oxygen", "Helvetica Neue",
+	sans-serif;
+
+@import "~bootstrap/scss/bootstrap";
