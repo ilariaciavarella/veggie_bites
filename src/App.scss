@@ -1,5 +1,14 @@
 @import "./assets/styles/custom.scss";
 
+body {
+	min-height: 100vh;
+	#root {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+}
+
 h1 {
 	font-family: "DM Serif Display", serif;
 }
