@@ -2,9 +2,12 @@ import React from 'react'
 
 import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
-import { Instagram, Github, Linkedin } from 'react-bootstrap-icons'
 
 export default function Footer() {
+    const iconStyle = {
+        fontSize: '1.5rem'
+    };
+
     return (
         <footer
             className='px-3 w-100 mt-auto'>
@@ -13,13 +16,13 @@ export default function Footer() {
                 <small className='text-center' >© 2024 Veggie Bites by Ilaria Ciavarella &ndash; All rights reserved</small>
                 <Stack direction='horizontal' gap={3}  >
                     <a href='https://www.linkedin.com/in/ilaria-ciavarella' className='text-dark' >
-                        <Linkedin size={24} />
+                        <i class="bi bi-linkedin" style={iconStyle}></i>
                     </a>
                     <a href='https://github.com/ilariaciavarella' className='text-dark' >
-                        <Github size={24} />
+                        <i class="bi bi-github" style={iconStyle}></i>
                     </a>
                     <a href='https://www.instagram.com/lil.ciavarella/' className='text-dark' >
-                        <Instagram size={24} />
+                        <i class="bi bi-instagram" style={iconStyle}></i>
                     </a>
                 </Stack>
             </Container>

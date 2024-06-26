@@ -1,11 +1,9 @@
 import React from 'react'
 
 import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
 
-import { Search } from 'react-bootstrap-icons'
+import SearchBar from '../search-bar/SearchBar'
+
 import logo from '../../assets/images/veggie_bites-logo_hor.svg'
 
 export default function NavigationBar() {
@@ -22,17 +20,7 @@ export default function NavigationBar() {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end py-2'>
-                <Form inline className='d-flex gap-2'>
-                    <InputGroup>
-                        <Form.Control
-                            type='search'
-                            placeholder='&ldquo;Carrot cake&rdquo;'
-                            className='px-3 py-2'
-                        />
-                        <Button type='submit' className='d-flex align-items-center px-3 py-2' ><Search size={20} /></Button>
-                    </InputGroup>
-
-                </Form>
+                <SearchBar size='sm' color='primary' />
             </Navbar.Collapse>
         </Navbar >
     )
