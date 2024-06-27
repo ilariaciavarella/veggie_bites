@@ -10,7 +10,7 @@ export default function IconButton(props) {
             size={props.size}
             onClick={props.handleClick}
         >
-            <i class={`bi bi-${props.icon}`} ></i>
+            <i className={`bi bi-${props.icon}`} ></i>
             {props.text}
         </Button>
     )

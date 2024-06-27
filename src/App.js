@@ -2,38 +2,38 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import './App.scss';
 
-import Home from './pages/Home';
-import Results from './pages/Results';
-import Recipe from './pages/Recipe';
-import Error from './pages/Error';
-
-import NavigationBar from './components/navigation-bar/NavigationBar';
-import Footer from './components/footer/Footer'
+import Root from './routes/Root';
+import Home from './routes/Home';
+import Results from './routes/Results';
+import Recipe from './routes/Recipe';
+import Error from './routes/Error';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
-        errorElement: <Error />
+        element: <Root />,
+        errorElement: <Error />,
+        children: [
+            {
+                path: '/',
+                element: <Home />
+            },
+            {
+                path: 'results',
+                element: <Results />
+            },
+            {
+                path: 'recipe',
+                element: <Recipe />
+            }
+        ]
     },
-    {
-        path: "results",
-        element: <Results />
-    },
-    {
-        path: "recipe",
-        element: <Recipe />,
-    }
 ])
 
 function App() {
-
-
     return (
         <>
-            <NavigationBar />
             <RouterProvider router={router} />
-            <Footer />
         </>
     );
 }

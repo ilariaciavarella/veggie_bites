@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 export default function SearchBar(props) {
     return (
-        <Form inline className='d-flex gap-2'>
+        <Form className='d-flex gap-2'>
             <InputGroup>
                 <Form.Control
                     type='search'
@@ -14,7 +14,7 @@ export default function SearchBar(props) {
                     size={props.size}
                 />
                 <Button type='submit' className='d-flex align-items-center' size={props.size} variant={props.color}>
-                    <i class="bi bi-search"></i>
+                    <i className="bi bi-search"></i>
                 </Button>
             </InputGroup>
         </Form>

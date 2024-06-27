@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 
 import SearchBar from '../components/search-bar/SearchBar'
 import IconButton from '../components/icon-button/IconButton'
@@ -15,7 +16,7 @@ export default function Home() {
             <Container fluid className='mb-5'>
                 <Row className='align-items-center'>
                     <Col xs={12} md={6} >
-                        <img src={imageHome} alt='Waffles' className='img-fluid' />
+                        <Image fluid src={imageHome} alt='Waffles' />
                     </Col>
                     <Col xs={12} md={6} className='p-md-5' >
                         <h1 className='mb-4' >Your source for tasty vegetarian recipes</h1>
