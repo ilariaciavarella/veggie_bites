@@ -19,7 +19,7 @@ export default function Error() {
     return (
         <>
             <NavigationBar searchBar={true} />
-            <main className='flex-grow-1 d-flex align-items-center'>
+            <main className='flex-grow-1 d-flex align-items-center py-md-5 py-4'>
                 <Container fluid className='p-0 mb-5'>
                     <Row className='m-0 align-items-center'>
                         <Col xs={12} md={6} className='py-5 px-md-5' >

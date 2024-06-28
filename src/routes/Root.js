@@ -17,7 +17,7 @@ export default function Root() {
         return () => {
             document.body.removeAttribute('style');
         };
-    }, []);
+    }, [location.pathname]);
 
     return (
         <>
