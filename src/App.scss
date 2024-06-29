@@ -9,7 +9,13 @@ body {
 	}
 }
 
-h1 {
+h1,
+h2,
+h3 {
 	font-family: "DM Serif Display", serif;
 	letter-spacing: 0.05rem;
+}
+
+h2 {
+	color: #ce3a7c;
 }

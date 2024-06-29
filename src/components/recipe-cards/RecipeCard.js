@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
+import Card from 'react-bootstrap/esm/Card';
+import Badge from 'react-bootstrap/esm/Badge';
 
 export default function RecipeCard(props) {
     return (

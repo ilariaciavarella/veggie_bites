@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
+import Image from 'react-bootstrap/esm/Image';
 
 import SearchBar from '../components/search-bar/SearchBar'
 import IconButton from '../components/icon-button/IconButton'

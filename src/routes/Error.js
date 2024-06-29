@@ -1,10 +1,10 @@
 import React from 'react'
 import { useRouteError } from 'react-router-dom';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
+import Image from 'react-bootstrap/esm/Image';
 
 import NavigationBar from '../components/navigation-bar/NavigationBar';
 import Footer from '../components/footer/Footer'
