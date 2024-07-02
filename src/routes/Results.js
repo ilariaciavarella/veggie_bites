@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Form from 'react-bootstrap/esm/Form';
 import Dropdown from 'react-bootstrap/esm/Dropdown';
-import DropdownButton from 'react-bootstrap/esm/DropdownButton';
+import ToggleButton from 'react-bootstrap/esm/ToggleButton';
 
 import RecipeCard from '../components/recipe-cards/RecipeCard';
 
@@ -16,39 +16,39 @@ export default function Results() {
         <main className='py-md-5 py-4 px-2'>
             <Container fluid className='pb-3' >
                 <h1>X Results for <em>Query</em></h1>
-                <Stack direction='horizontal' gap={4} className='mt-5'>
-                    <Form className='results-dropdown'>
-                        <Form.Check
-                            type="checkbox"
-                            id="vegan-friendly"
-                            label="Vegan friendly"
-                        />
-                    </Form>
-                    <Dropdown autoClose='outside'  >
-                        <Dropdown.Toggle id="intolerances-dropdown" className='results-dropdown' >
+                <Stack direction='horizontal' gap={3} className='mt-5'>
+                    <ToggleButton
+                        id='vegan-friendly'
+                        type='checkbox'
+                        variant='outline-primary'
+                    >
+                        Vegan friendly
+                    </ToggleButton>
+                    <Dropdown autoClose='outside' >
+                        <Dropdown.Toggle id='intolerances-dropdown' variant='outline-primary'>
                             Intolerances
                         </Dropdown.Toggle>
                         <Dropdown.Menu className='p-3'>
                             <Form.Check
-                                type="checkbox"
-                                id="lactose"
-                                label="Lactose"
+                                type='checkbox'
+                                id='lactose'
+                                label='Lactose'
                             />
                             <Form.Check
-                                type="checkbox"
-                                id="nuts"
-                                label="Nuts"
+                                type='checkbox'
+                                id='nuts'
+                                label='Nuts'
                             />
                             <Form.Check
-                                type="checkbox"
-                                id="gluten"
-                                label="Gluten"
+                                type='checkbox'
+                                id='gluten'
+                                label='Gluten'
                             />
                         </Dropdown.Menu>
 
                     </Dropdown>
                     <Dropdown autoClose='outside' >
-                        <Dropdown.Toggle id="time-dropdown" className='results-dropdown'>
+                        <Dropdown.Toggle id='time-dropdown' variant='outline-primary'>
                             Time to prepare
                         </Dropdown.Toggle>
                         <Dropdown.Menu className='p-3'>
@@ -56,29 +56,29 @@ export default function Results() {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown autoClose='outside' >
-                        <Dropdown.Toggle id="meals-dropdown" className='results-dropdown'>
+                        <Dropdown.Toggle id='meals-dropdown' variant='outline-primary'>
                             Meal types
                         </Dropdown.Toggle>
                         <Dropdown.Menu className='p-3'>
                             <Form.Check
-                                type="checkbox"
-                                id="Breakfast"
-                                label="Breakfast"
+                                type='checkbox'
+                                id='Breakfast'
+                                label='Breakfast'
                             />
                             <Form.Check
-                                type="checkbox"
-                                id="Lunch"
-                                label="Lunch"
+                                type='checkbox'
+                                id='Lunch'
+                                label='Lunch'
                             />
                             <Form.Check
-                                type="checkbox"
-                                id="Dinner"
-                                label="Dinner"
+                                type='checkbox'
+                                id='Dinner'
+                                label='Dinner'
                             />
                             <Form.Check
-                                type="checkbox"
-                                id="Snack"
-                                label="Snack"
+                                type='checkbox'
+                                id='Snack'
+                                label='Snack'
                             />
                         </Dropdown.Menu>
                     </Dropdown>
