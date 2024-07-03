@@ -24,7 +24,8 @@ export default function Error() {
                     <Row className='m-0 align-items-center'>
                         <Col xs={12} md={6} className='py-5 px-md-5' >
                             <h1>Oops, something went wrong...</h1>
-                            <p>Sorry, the page you are looking for doesn't exist.<br />Return to the home and try another research.</p>
+                            <small className='opacity-50 fst-italic'>{error.statusText || error.message}</small>
+                            <p>Sorry, an unexpected error has occurred.<br />Return to the home and try another research.</p>
                             <IconButton
                                 icon='house'
                                 text='Go back home'
