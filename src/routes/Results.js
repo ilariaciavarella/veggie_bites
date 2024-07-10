@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Container from 'react-bootstrap/esm/Container';
 import Stack from 'react-bootstrap/esm/Stack';
@@ -12,10 +13,12 @@ import ToggleButton from 'react-bootstrap/esm/ToggleButton';
 import RecipeCard from '../components/recipe-cards/RecipeCard';
 
 export default function Results() {
+    const query = useSelector((state) => state.query.value);
+
     return (
         <main className='py-md-5 py-4 px-2'>
             <Container fluid className='pb-3' >
-                <h1>X Results for <em>Query</em></h1>
+                <h1>X Results for <em>{query}</em></h1>
                 <Stack direction='horizontal' gap={3} className='mt-5'>
                     <ToggleButton
                         id='vegan-friendly'

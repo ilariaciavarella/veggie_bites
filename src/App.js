@@ -1,5 +1,4 @@
-import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import './App.scss';
 
@@ -20,7 +19,7 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: 'results/:params',
+                path: 'search?',
                 element: <Results />
             },
             {

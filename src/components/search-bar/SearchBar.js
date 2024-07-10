@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { redirect, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -10,9 +10,9 @@ import { updateQuery } from '../../features/query/querySlice';
 
 export default function SearchBar(props) {
     const dispatch = useDispatch();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
 
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState('')
 
     function handleChange(e) {
         setQuery(e.target.value);
@@ -20,8 +20,11 @@ export default function SearchBar(props) {
 
     function handleQuerySubmit(e) {
         e.preventDefault();
-        dispatch(updateQuery(query));
-        setSearchParams({ query: query });
+        dispatch(updateQuery(query.trim()));
+        localStorage.setItem('storedQuery', query.trim());
+        if (query.trim()) {
+            navigate(`/search?query=${encodeURIComponent(query)}`);
+        }
     }
 
     return (
