@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import Container from 'react-bootstrap/esm/Container';
 import Stack from 'react-bootstrap/esm/Stack';
@@ -15,10 +16,45 @@ import RecipeCard from '../components/recipe-cards/RecipeCard';
 export default function Results() {
     const query = useSelector((state) => state.query.value);
 
+    const API_KEY = 'ee39910daf9c4e88a8897dc4f600a95c';
+
+    const client = axios.create({
+        baseURL: "https://api.spoonacular.com/recipes/"
+    });
+
+    const [recipesList, setRecipesList] = useState([]);
+    const [numOfResults, setNumOfResults] = useState(0);
+    const numOfPages = Math.ceil(numOfResults / 12);
+
+    useEffect(() => {
+        client.get(`complexSearch?query=${query}&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${API_KEY}`).then((response) => {
+            setRecipesList(response.data.results);
+            setNumOfResults(response.data.totalResults);
+            console.log(response.data.results);
+        });
+    }, [])
+
+    const recipesItems = recipesList.map(recipe => {
+        return (
+            <Col xs={12} md={4} lg={3} key={recipe.id} >
+                <RecipeCard type={recipe.dishTypes[0]} title={recipe.title} time={recipe.readyInMinutes} image={recipe.image || '../assets/images/veggie_bites-no_image.jpg'} vegan={recipe.vegan} />
+            </Col>
+        )
+    })
+
+    const paginationItems = [];
+    for (let i = 0; i < numOfPages; i++) {
+        paginationItems.push(
+            <Pagination.Item key={i}>
+                {i}
+            </Pagination.Item>
+        )
+    };
+
     return (
         <main className='py-md-5 py-4 px-2'>
             <Container fluid className='pb-3' >
-                <h1>X Results for <em>{query}</em></h1>
+                <h1>{numOfResults} Results for <em>{query.slice(0, 1).toUpperCase() + query.slice(1)}</em></h1>
                 <Stack direction='horizontal' gap={3} className='mt-5'>
                     <ToggleButton
                         id='vegan-friendly'
@@ -89,56 +125,17 @@ export default function Results() {
             </Container>
             <Container fluid>
                 <Row>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-                    <Col xs={12} md={4} lg={3} >
-                        <RecipeCard type='dessert' title='Apple pie' time='15' image='https://picsum.photos/600/400' />
-                    </Col>
-
+                    {recipesItems}
                 </Row>
             </Container>
-            <Pagination className='justify-content-center mt-5'>
-                <Pagination.First />
-                <Pagination.Prev />
-                <Pagination.Item>{10}</Pagination.Item>
-                <Pagination.Item>{11}</Pagination.Item>
-                <Pagination.Item active>{12}</Pagination.Item>
-                <Pagination.Item>{13}</Pagination.Item>
-                <Pagination.Item >{14}</Pagination.Item>
-                <Pagination.Next />
-                <Pagination.Last />
-            </Pagination>
+            {numOfPages > 1 &&
+                <Pagination className='justify-content-center mt-5'>
+                    <Pagination.First />
+                    <Pagination.Prev />
+                    {paginationItems}
+                    <Pagination.Next />
+                    <Pagination.Last />
+                </Pagination>}
         </main>
     )
 }
