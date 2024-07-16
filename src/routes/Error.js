@@ -5,10 +5,10 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Image from 'react-bootstrap/esm/Image';
+import Button from 'react-bootstrap/esm/Button';
 
 import NavigationBar from '../components/navigation-bar/NavigationBar';
 import Footer from '../components/footer/Footer'
-import IconButton from '../components/icon-button/IconButton';
 
 import errorImage from '../assets/images/burnt_bread-404.jpg'
 
@@ -26,15 +26,16 @@ export default function Error() {
                             <h1>Oops, something went wrong...</h1>
                             <small className='opacity-50 fst-italic'>{error.statusText || error.message}</small>
                             <p>Sorry, an unexpected error has occurred.<br />Return to the home and try another research.</p>
-                            <IconButton
-                                icon='house'
-                                text='Go back home'
-                                size='sm'
+                            <Button
+                                className='mt-2 d-flex align-items-center justify-content-center gap-3'
                                 variant='primary'
-                                handleClick={() => {
+                                size='sm'
+                                onClick={() => {
                                     window.location.href = './';
                                 }}
-                            />
+                            >
+                                Go back home
+                            </Button>
                         </Col>
                         <Col xs={12} md={6} >
                             <Image src={errorImage} alt='Burnt slice of bread' fluid rounded />
