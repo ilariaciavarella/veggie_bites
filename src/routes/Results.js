@@ -15,7 +15,7 @@ import RecipeCard from '../components/recipe-cards/RecipeCard';
 import { useLoaderData } from 'react-router-dom';
 
 export async function loader() {
-    const API_KEY = 'ee39910daf9c4e88a8897dc4f600a95c';
+    const API_KEY = '0b2ddbba35164b8db34eb7bb9074312a';
     const client = axios.create({
         baseURL: "https://api.spoonacular.com/recipes/"
     });
@@ -42,7 +42,7 @@ export default function Results() {
     const recipesItems = results.map(recipe => {
         return (
             <Col xs={12} md={4} lg={3} key={recipe.id} >
-                <RecipeCard type={recipe.dishTypes[0]} title={recipe.title} time={recipe.readyInMinutes} image={recipe.image || '../assets/images/veggie_bites-no_image.jpg'} vegan={recipe.vegan} />
+                <RecipeCard type={recipe.dishTypes[0]} title={recipe.title} time={recipe.readyInMinutes} image={recipe.image} vegan={recipe.vegan} />
             </Col>
         )
     })

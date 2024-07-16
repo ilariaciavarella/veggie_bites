@@ -3,17 +3,12 @@ import React from 'react';
 import Card from 'react-bootstrap/esm/Card';
 import Badge from 'react-bootstrap/esm/Badge';
 
-import fallbackImage from '../../assets/images/veggie_bites-no_image.jpg'
+import fallbackImage from '../../assets/utilities/fallbackImage'
 
 export default function RecipeCard(props) {
-    function replaceImage({ currentTarget }) {
-        currentTarget.onerror = null;
-        currentTarget.src = fallbackImage;
-    }
-
     return (
         <Card className='shadow border-0 mb-4'>
-            <Card.Img variant='top' src={props.image} alt={props.title + ' picture'} onError={replaceImage} />
+            <Card.Img variant='top' src={props.image} alt={props.title + ' picture'} onError={fallbackImage} />
             {props.vegan &&
                 <Card.ImgOverlay>
                     <Badge pill bg="tertiary">Vegan friendly</Badge>
