@@ -12,29 +12,34 @@ import Dropdown from 'react-bootstrap/esm/Dropdown';
 import ToggleButton from 'react-bootstrap/esm/ToggleButton';
 
 import RecipeCard from '../components/recipe-cards/RecipeCard';
+import { useLoaderData } from 'react-router-dom';
 
-export default function Results() {
-    const query = useSelector((state) => state.query.value);
-
+export async function loader() {
     const API_KEY = 'ee39910daf9c4e88a8897dc4f600a95c';
-
     const client = axios.create({
         baseURL: "https://api.spoonacular.com/recipes/"
     });
+    const results = await client.get(`complexSearch?query=beans&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${API_KEY}`).then(response => response.data.results);
+    const numberOfResults = await client.get(`complexSearch?query=beans&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${API_KEY}`).then(response => response.data.totalResults);
+    return { results, numberOfResults }
+}
 
-    const [recipesList, setRecipesList] = useState([]);
-    const [numOfResults, setNumOfResults] = useState(0);
-    const numOfPages = Math.ceil(numOfResults / 12);
+export default function Results() {
+    const query = useSelector((state) => state.query.value);
+    const { results, numberOfResults } = useLoaderData();
+
+    const numOfPages = Math.ceil(numberOfResults / 12);
 
     useEffect(() => {
-        client.get(`complexSearch?query=${query}&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${API_KEY}`).then((response) => {
-            setRecipesList(response.data.results);
-            setNumOfResults(response.data.totalResults);
-            console.log(response.data.results);
-        });
+        // client.get(`complexSearch?query=${query}&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${API_KEY}`).then((response) => {
+        //     setRecipesList(response.data.results);
+        //     setNumOfResults(response.data.totalResults);
+        //     console.log(response.data.results);
+        // });
+        console.log(results)
     }, [])
 
-    const recipesItems = recipesList.map(recipe => {
+    const recipesItems = results.map(recipe => {
         return (
             <Col xs={12} md={4} lg={3} key={recipe.id} >
                 <RecipeCard type={recipe.dishTypes[0]} title={recipe.title} time={recipe.readyInMinutes} image={recipe.image || '../assets/images/veggie_bites-no_image.jpg'} vegan={recipe.vegan} />
@@ -54,7 +59,7 @@ export default function Results() {
     return (
         <main className='py-md-5 py-4 px-2'>
             <Container fluid className='pb-3' >
-                <h1>{numOfResults} Results for <em>{query.slice(0, 1).toUpperCase() + query.slice(1)}</em></h1>
+                <h1>{numberOfResults || 0} Results for <em>{query.slice(0, 1).toUpperCase() + query.slice(1)}</em></h1>
                 <Stack direction='horizontal' gap={3} className='mt-5'>
                     <ToggleButton
                         id='vegan-friendly'

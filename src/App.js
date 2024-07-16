@@ -4,9 +4,11 @@ import './App.scss';
 
 import Root from './routes/Root';
 import Home from './routes/Home';
-import Results from './routes/Results';
+import Results, { loader as resultsLoader } from './routes/Results';
 import Recipe from './routes/Recipe';
 import Error from './routes/Error';
+
+import { loader } from "./components/search-bar/SearchBar";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +22,8 @@ const router = createBrowserRouter([
             },
             {
                 path: 'search?',
-                element: <Results />
+                element: <Results />,
+                loader: resultsLoader
             },
             {
                 path: 'recipes/:recipeid',
