@@ -18,14 +18,16 @@ export async function loader() {
     const client = axios.create({
         baseURL: "https://api.spoonacular.com/recipes/"
     });
-    const recipe = await client.get(`/635066/information?includeNutrition=false&apiKey=${API_KEY}`).then(response => response.data);
-    return { recipe }
+    const recipe = await client.get(`/635066/information?apiKey=${API_KEY}&includeNutrition=false`).then(response => response.data);
+    const similar = await client.get(`/635066/similar?apiKey=${API_KEY}&number=4`).then(response => response.data);
+    return { recipe, similar }
 }
 
 export default function Recipe() {
-    const { recipe } = useLoaderData();
+    const { recipe, similar } = useLoaderData();
     useEffect(() => {
-        console.log(recipe)
+        console.log(recipe);
+        console.log(similar)
     })
 
     const dishTypesBadges = recipe.dishTypes.map(dishType => {
@@ -36,13 +38,21 @@ export default function Recipe() {
 
     const ingredients = recipe.extendedIngredients.map(ingredient => {
         return (
-            <li>{ingredient.original.slice(0, 1).toUpperCase() + ingredient.original.slice(1)}</li>
+            <li key={ingredient.id}>{ingredient.original.slice(0, 1).toUpperCase() + ingredient.original.slice(1)}</li>
         )
     })
 
     const instructions = recipe.analyzedInstructions[0].steps.map(instruction => {
         return (
-            <li>{instruction.step}</li>
+            <li key={instruction.number}>{instruction.step}</li>
+        )
+    })
+
+    const similarRecipesCards = similar.map(similarRecipe => {
+        return (
+            <Col xs={6} md={3} className='px-1' >
+                <RecipeCardSmall image={`https://img.spoonacular.com/recipes/${similarRecipe.id}-312x231.${similarRecipe.imageType}`} title={similarRecipe.title} />
+            </Col>
         )
     })
 
@@ -57,28 +67,28 @@ export default function Recipe() {
             </Container>
             <Container fluid className='my-4'>
                 <Row>
-                    <Col xs={12} md={8} >
-                        <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
+                    <Col xs={12} md={6} >
+                        <Row className='mb-3'>
+                            <Col className='border-end border-primary border-opacity-25'>
+                                <p className='m-0'>Ready in</p>
+                                <p className='m-0 text-uppercase text-primary'><strong>{recipe.readyInMinutes} minutes</strong></p>
+                            </Col>
+                            <Col>
+                                <p className='m-0'>Servings</p>
+                                <p className='m-0 text-uppercase text-primary'><strong>{recipe.servings} people</strong></p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
+                        </Row>
                     </Col>
-                    <Col xs={12} md={{ order: 'last' }}>
+                    <Col xs={12} md={6} >
                         <Image
                             src={recipe.image}
                             alt='food image' rounded fluid
                             className='border border-primary border-opacity-25 w-100'
                             onError={fallbackImage}
                         />
-                    </Col>
-                    <Col xs={12} md={4}>
-                        <Row className='mt-3 mt-md-0'>
-                            <Col className='border-end border-primary border-opacity-25'>
-                                <p className='m-0'>Ready in</p>
-                                <p className='m-0 text-uppercase text-primary'><strong>15 minutes</strong></p>
-                            </Col>
-                            <Col>
-                                <p className='m-0'>Servings</p>
-                                <p className='m-0 text-uppercase text-primary'><strong>8 people</strong></p>
-                            </Col>
-                        </Row>
                     </Col>
                 </Row>
             </Container>
@@ -101,18 +111,7 @@ export default function Recipe() {
             <Container fluid className='my-5'>
                 <h3 className='mb-3'>You might also like</h3>
                 <Row >
-                    <Col xs={6} md={3} className='px-1' >
-                        <RecipeCardSmall image='https://picsum.photos/seed/picsum/600/400' title='Raspberry Pie' />
-                    </Col>
-                    <Col xs={6} md={3} className='px-1' >
-                        <RecipeCardSmall image='https://picsum.photos/seed/picsum/600/400' title='Cherry Pie' />
-                    </Col>
-                    <Col xs={6} md={3} className='px-1' >
-                        <RecipeCardSmall image='https://picsum.photos/seed/picsum/600/400' title='Apple Pie' />
-                    </Col>
-                    <Col xs={6} md={3} className='px-1' >
-                        <RecipeCardSmall image='https://picsum.photos/seed/picsum/600/400' title='Ricotta Pie' />
-                    </Col>
+                    {similarRecipesCards}
                 </Row>
             </Container>
         </main>
