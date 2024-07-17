@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { nanoid } from 'nanoid';
 
 import { useLoaderData } from 'react-router-dom';
 
@@ -32,7 +33,7 @@ export default function Recipe() {
 
     const dishTypesBadges = recipe.dishTypes.map(dishType => {
         return (
-            <Badge pill>{dishType.slice(0, 1).toUpperCase() + dishType.slice(1)}</Badge>
+            <Badge pill key={nanoid()}>{dishType.slice(0, 1).toUpperCase() + dishType.slice(1)}</Badge>
         )
     })
 
@@ -50,8 +51,8 @@ export default function Recipe() {
 
     const similarRecipesCards = similar.map(similarRecipe => {
         return (
-            <Col xs={6} md={3} className='px-1' >
-                <RecipeCardSmall image={`https://img.spoonacular.com/recipes/${similarRecipe.id}-312x231.${similarRecipe.imageType}`} title={similarRecipe.title} />
+            <Col xs={6} md={3} className='px-1' key={similarRecipe.id}>
+                <RecipeCardSmall recipeId={similarRecipe.id} image={`https://img.spoonacular.com/recipes/${similarRecipe.id}-312x231.${similarRecipe.imageType}`} title={similarRecipe.title} />
             </Col>
         )
     })

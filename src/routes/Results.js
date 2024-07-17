@@ -42,7 +42,7 @@ export default function Results() {
     const recipesItems = results.map(recipe => {
         return (
             <Col xs={12} md={4} lg={3} key={recipe.id} >
-                <RecipeCard type={recipe.dishTypes[0]} title={recipe.title} time={recipe.readyInMinutes} image={recipe.image} vegan={recipe.vegan} />
+                <RecipeCard recipeId={recipe.id} type={recipe.dishTypes[0]} title={recipe.title} time={recipe.readyInMinutes} image={recipe.image} vegan={recipe.vegan} />
             </Col>
         )
     })
