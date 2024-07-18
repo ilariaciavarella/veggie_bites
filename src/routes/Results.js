@@ -15,12 +15,11 @@ import RecipeCard from '../components/recipe-cards/RecipeCard';
 import { useLoaderData } from 'react-router-dom';
 
 export async function loader() {
-    const API_KEY = '0b2ddbba35164b8db34eb7bb9074312a';
     const client = axios.create({
-        baseURL: "https://api.spoonacular.com/recipes/"
+        baseURL: process.env.REACT_APP_API_BASE_URL
     });
-    const results = await client.get(`complexSearch?query=beans&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${API_KEY}`).then(response => response.data.results);
-    const numberOfResults = await client.get(`complexSearch?query=beans&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${API_KEY}`).then(response => response.data.totalResults);
+    const results = await client.get(`complexSearch?query=beans&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${process.env.REACT_APP_API_KEY}`).then(response => response.data.results);
+    const numberOfResults = await client.get(`complexSearch?query=beans&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${process.env.REACT_APP_API_KEY}`).then(response => response.data.totalResults);
     return { results, numberOfResults }
 }
 

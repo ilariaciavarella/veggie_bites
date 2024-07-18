@@ -15,12 +15,11 @@ import RecipeCardSmall from '../components/recipe-cards/RecipeCardSmall'
 import fallbackImage from '../assets/utilities/fallbackImage'
 
 export async function loader() {
-    const API_KEY = '0b2ddbba35164b8db34eb7bb9074312a';
     const client = axios.create({
-        baseURL: "https://api.spoonacular.com/recipes/"
+        baseURL: process.env.REACT_APP_API_BASE_URL
     });
-    const recipe = await client.get(`/635066/information?apiKey=${API_KEY}&includeNutrition=false`).then(response => response.data);
-    const similar = await client.get(`/635066/similar?apiKey=${API_KEY}&number=4`).then(response => response.data);
+    const recipe = await client.get(`/635066/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false`).then(response => response.data);
+    const similar = await client.get(`/635066/similar?apiKey=${process.env.REACT_APP_API_KEY}&number=4`).then(response => response.data);
     return { recipe, similar }
 }
 
