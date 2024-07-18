@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRouteError } from 'react-router-dom';
+import { useRouteError, Link } from 'react-router-dom';
 
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
@@ -26,16 +26,12 @@ export default function Error() {
                             <h1>Oops, something went wrong...</h1>
                             <small className='opacity-50 fst-italic'>{error.statusText || error.message}</small>
                             <p>Sorry, an unexpected error has occurred.<br />Return to the home and try another research.</p>
-                            <Button
-                                className='mt-2 d-flex align-items-center justify-content-center gap-3'
+                            <Link to='/'
+                                className='btn btn-primary btn-sm mt-2 text-decoration-none'
                                 variant='primary'
-                                size='sm'
-                                onClick={() => {
-                                    window.location.href = './';
-                                }}
                             >
                                 Go back home
-                            </Button>
+                            </Link>
                         </Col>
                         <Col xs={12} md={6} >
                             <Image src={errorImage} alt='Burnt slice of bread' fluid rounded />
