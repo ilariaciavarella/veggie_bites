@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { nanoid } from 'nanoid';
-
 import { useLoaderData } from 'react-router-dom';
 
-import Container from 'react-bootstrap/esm/Container'
-import Badge from 'react-bootstrap/esm/Badge'
-import Stack from 'react-bootstrap/esm/Stack'
-import Image from 'react-bootstrap/esm/Image'
-import Row from 'react-bootstrap/esm/Row'
-import Col from 'react-bootstrap/esm/Col'
+import Container from 'react-bootstrap/esm/Container';
+import Badge from 'react-bootstrap/esm/Badge';
+import Stack from 'react-bootstrap/esm/Stack';
+import Image from 'react-bootstrap/esm/Image';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 
-import RecipeCardSmall from '../components/recipe-cards/RecipeCardSmall'
-import fallbackImage from '../assets/utilities/fallbackImage'
+import RecipeCardSmall from '../components/recipe-cards/RecipeCardSmall';
+import fallbackImage from '../assets/utilities/fallbackImage';
 
-export async function loader() {
+export async function loader({ params }) {
     const client = axios.create({
         baseURL: process.env.REACT_APP_API_BASE_URL
     });
-    const recipe = await client.get(`/635066/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false`).then(response => response.data);
-    const similar = await client.get(`/635066/similar?apiKey=${process.env.REACT_APP_API_KEY}&number=4`).then(response => response.data);
+    const recipe = await client.get(`/${params.recipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false`)
+        .then(response => response.data);
+    const similar = await client.get(`/${params.recipeId}/similar?apiKey=${process.env.REACT_APP_API_KEY}&number=4`)
+        .then(response => response.data);
     return { recipe, similar }
 }
 
@@ -51,7 +52,10 @@ export default function Recipe() {
     const similarRecipesCards = similar.map(similarRecipe => {
         return (
             <Col xs={6} md={3} className='px-1' key={similarRecipe.id}>
-                <RecipeCardSmall recipeId={similarRecipe.id} image={`https://img.spoonacular.com/recipes/${similarRecipe.id}-312x231.${similarRecipe.imageType}`} title={similarRecipe.title} />
+                <RecipeCardSmall
+                    recipeId={similarRecipe.id}
+                    image={`https://img.spoonacular.com/recipes/${similarRecipe.id}-312x231.${similarRecipe.imageType}`}
+                    title={similarRecipe.title} />
             </Col>
         )
     })
