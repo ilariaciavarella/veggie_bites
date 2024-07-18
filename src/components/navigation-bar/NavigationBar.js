@@ -10,9 +10,9 @@ export default function NavigationBar(props) {
     return (
         <Navbar expand='md' className='bg-light justify-content-between
          shadow-sm px-3 py-1'>
-            <Navbar.Brand href='./' >
+            <Navbar.Brand href='/' >
                 <img
-                    className='d-block'
+                    className='d-block text-decoration-none'
                     src={logo}
                     alt='Veggie Bites logo'
                     height='60px'
