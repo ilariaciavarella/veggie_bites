@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { Form, useNavigate, useSearchParams } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-import { updateQuery } from '../../features/query/querySlice';
-
 export default function SearchBar(props) {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const [query, setQuery] = useState('');
     const [isFormInvalid, setIsFormInvalid] = useState(false);
@@ -21,14 +18,15 @@ export default function SearchBar(props) {
     function handleQuerySubmit(e) {
         e.preventDefault();
         if (query.match(/^[a-zA-Z0-9-]+(?:\s+[a-zA-Z0-9-]+)*$/)) {
-            setSearchParams(query);
+            localStorage.setItem('storedQuery', query);
+            navigate(`/results?search=${query}`)
         } else {
             setIsFormInvalid(true)
         }
     }
 
     return (
-        <Form className='d-flex gap-2' role='search' id='search-form' action='/search'>
+        <Form className='d-flex gap-2' role='search' id='search-form' onSubmit={handleQuerySubmit}>
             <InputGroup>
                 <input
                     className={!isFormInvalid ? `form-control form-control-${props.size}` : `form-control form-control-${props.size} is-invalid`}
