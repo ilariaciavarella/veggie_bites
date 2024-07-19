@@ -18,9 +18,15 @@ export async function loader({ params }) {
         baseURL: process.env.REACT_APP_API_BASE_URL
     });
     const recipe = await client.get(`/${params.recipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false`)
-        .then(response => response.data);
+        .then(response => response.data)
+        .catch(error => {
+            console.log(error.message)
+        });
     const similar = await client.get(`/${params.recipeId}/similar?apiKey=${process.env.REACT_APP_API_KEY}&number=4`)
-        .then(response => response.data);
+        .then(response => response.data)
+        .catch(error => {
+            console.log(error.message)
+        });
     return { recipe, similar }
 }
 
