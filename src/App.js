@@ -4,10 +4,9 @@ import './App.scss';
 
 import Root from './routes/Root';
 import Home from './routes/Home';
+import Error from './routes/Error';
 import Results, { loader as resultsLoader } from './routes/Results';
 import Recipe, { loader as recipeLoader } from './routes/Recipe';
-import Error from './routes/Error';
-
 
 const router = createBrowserRouter([
     {
@@ -20,7 +19,7 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: 'search',
+                path: 'results',
                 element: <Results />,
                 loader: resultsLoader
             },

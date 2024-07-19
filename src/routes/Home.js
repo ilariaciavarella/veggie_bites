@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
