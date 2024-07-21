@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ResponsivePagination from 'react-responsive-pagination';
 import { dropEllipsis, dropFirstAndLast, combine } from 'react-responsive-pagination/narrowBehaviour'
