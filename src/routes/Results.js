@@ -3,25 +3,26 @@ import { useLoaderData, useNavigation } from 'react-router-dom';
 import axios from 'axios';
 
 import Container from 'react-bootstrap/esm/Container';
-import Pagination from 'react-bootstrap/esm/Pagination';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Spinner from 'react-bootstrap/esm/Spinner';
 
 import RecipeCard from '../components/recipe-cards/RecipeCard';
 import VeganFriendlyFilter from '../components/vegan-friendly-filter/VeganFriendlyFilter';
+import ResultsPagination from '../components/results-pagination/ResultsPagination';
 
 export async function loader({ request }) {
     const url = new URL(request.url);
     const query = url.searchParams.get('search');
     const diet = url.searchParams.get('veganFriendly') === 'true' ? 'vegan' : 'vegetarian';
+    const offset = (url.searchParams.get('page') - 1) * 12;
 
     const client = axios.create({
         baseURL: process.env.REACT_APP_API_BASE_URL
     });
     let results;
     let numberOfResults;
-    await client.get(`complexSearch?query=${query}&diet=${diet}&addRecipeInformation=true&number=12&apiKey=${process.env.REACT_APP_API_KEY}`)
+    await client.get(`complexSearch?query=${query}&diet=${diet}&addRecipeInformation=true&number=12&offset=${offset}&apiKey=${process.env.REACT_APP_API_KEY}`)
         .then(response => {
             results = response.data.results;
             numberOfResults = response.data.totalResults;
@@ -36,8 +37,6 @@ export default function Results() {
     const navigation = useNavigation();
     const { query, results, numberOfResults } = useLoaderData();
 
-    const numOfPages = Math.ceil(numberOfResults / 12);
-
     useEffect(() => {
         console.log(results);
     }, [])
@@ -47,7 +46,7 @@ export default function Results() {
             <Col xs={12} md={4} lg={3} key={recipe.id} >
                 <RecipeCard
                     recipeId={recipe.id}
-                    type={recipe.dishTypes[0] || ''}
+                    type={recipe.dishTypes[0] || 'Not specified'}
                     title={recipe.title}
                     time={recipe.readyInMinutes}
                     image={recipe.image}
@@ -55,15 +54,6 @@ export default function Results() {
             </Col>
         )
     })
-
-    const paginationItems = [];
-    for (let i = 0; i < numOfPages; i++) {
-        paginationItems.push(
-            <Pagination.Item key={i}>
-                {i}
-            </Pagination.Item>
-        )
-    };
 
     return (
         <main className='py-md-5 py-4 px-2'>
@@ -82,14 +72,7 @@ export default function Results() {
                     {navigation.state === 'loading' ? <Spinner animation='border' variant='primary' className='mx-auto' /> : recipesItems}
                 </Row>
             </Container>
-            {numOfPages > 1 &&
-                <Pagination className='justify-content-center mt-5'>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    {paginationItems}
-                    <Pagination.Next />
-                    <Pagination.Last />
-                </Pagination>}
+            {numberOfResults > 12 && navigation.state !== 'loading' && <ResultsPagination numberOfResults={numberOfResults} />}
         </main>
     )
 }

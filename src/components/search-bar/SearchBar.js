@@ -19,7 +19,7 @@ export default function SearchBar(props) {
         e.preventDefault();
         if (query.match(/^[a-zA-Z0-9-]+(?:\s+[a-zA-Z0-9-]+)*$/)) {
             localStorage.setItem('storedQuery', query);
-            navigate(`/results?search=${query}&veganFriendly=false`)
+            navigate(`/results?search=${query}&veganFriendly=false&page=1`)
         } else {
             setIsFormInvalid(true)
         }

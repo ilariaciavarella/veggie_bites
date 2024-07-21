@@ -11,7 +11,8 @@ export default function VeganFriendlyFilter() {
         setChecked(prev => !prev);
         setSearchParams(prev => ({
             'search': prev.get('search'),
-            'veganFriendly': !checked
+            'veganFriendly': !checked,
+            'page': 1
         }))
     }
 
