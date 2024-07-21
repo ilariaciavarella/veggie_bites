@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/esm/Button';
+import Error from '../../routes/Error';
 
 export default function RandomButton() {
     const navigate = useNavigate();
@@ -16,6 +17,8 @@ export default function RandomButton() {
             .then(response => response.data.recipes[0].id)
             .then(id => {
                 navigate(`/recipes/${id}`)
+            }).catch(error => {
+                console.log(error.message)
             })
     }
 

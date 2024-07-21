@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLoaderData, useSearchParams, useNavigation } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import axios from 'axios';
 
 import Container from 'react-bootstrap/esm/Container';
@@ -13,14 +13,15 @@ import VeganFriendlyFilter from '../components/vegan-friendly-filter/VeganFriend
 
 export async function loader({ request }) {
     const url = new URL(request.url);
-    const query = url.searchParams.get("search");
+    const query = url.searchParams.get('search');
+    const diet = url.searchParams.get('veganFriendly') === 'true' ? 'vegan' : 'vegetarian';
 
     const client = axios.create({
         baseURL: process.env.REACT_APP_API_BASE_URL
     });
     let results;
     let numberOfResults;
-    await client.get(`complexSearch?query=${query}&diet=vegetarian&addRecipeInformation=true&number=12&apiKey=${process.env.REACT_APP_API_KEY}`)
+    await client.get(`complexSearch?query=${query}&diet=${diet}&addRecipeInformation=true&number=12&apiKey=${process.env.REACT_APP_API_KEY}`)
         .then(response => {
             results = response.data.results;
             numberOfResults = response.data.totalResults;
@@ -34,13 +35,11 @@ export async function loader({ request }) {
 export default function Results() {
     const navigation = useNavigation();
     const { query, results, numberOfResults } = useLoaderData();
-    const [searchParams, setSearchParams] = useSearchParams();
 
     const numOfPages = Math.ceil(numberOfResults / 12);
 
     useEffect(() => {
         console.log(results);
-        console.log(searchParams.toString())
     }, [])
 
     const recipesItems = results.map(recipe => {
@@ -49,8 +48,8 @@ export default function Results() {
                 <RecipeCard
                     recipeId={recipe.id}
                     type={recipe.dishTypes[0] || ''}
-                    title={recipe.title} t
-                    ime={recipe.readyInMinutes}
+                    title={recipe.title}
+                    time={recipe.readyInMinutes}
                     image={recipe.image}
                     vegan={recipe.vegan} />
             </Col>

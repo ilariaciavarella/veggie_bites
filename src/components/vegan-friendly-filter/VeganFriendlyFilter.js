@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import Form from 'react-bootstrap/esm/Form';
 
 export default function VeganFriendlyFilter() {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [checked, setChecked] = useState(false);
 
-    function handleChange() {
+    function handleFilterChange() {
         setChecked(prev => !prev);
+        setSearchParams(prev => ({
+            'search': prev.get('search'),
+            'veganFriendly': !checked
+        }))
     }
 
     return (
@@ -16,7 +22,7 @@ export default function VeganFriendlyFilter() {
                 id="vegan-friendly"
                 label="Vegan friendly"
                 checked={checked}
-                onChange={handleChange}
+                onChange={handleFilterChange}
             />
         </Form>
     )
