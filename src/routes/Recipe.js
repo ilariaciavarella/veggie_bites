@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { nanoid } from 'nanoid';
 import { useLoaderData, useNavigation } from 'react-router-dom';
@@ -34,10 +34,6 @@ export async function loader({ params }) {
 export default function Recipe() {
     const navigation = useNavigation();
     const { recipe, similar } = useLoaderData();
-    useEffect(() => {
-        console.log(recipe);
-        console.log(similar)
-    })
 
     const dishTypesBadges = recipe.dishTypes.map(dishType => {
         return (

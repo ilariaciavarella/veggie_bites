@@ -43,7 +43,7 @@ export default function Results() {
                 <RecipeCard
                     recipeId={recipe.id}
                     type={recipe.dishTypes[0] || 'Not specified'}
-                    title={recipe.title}
+                    title={recipe.title || 'No title'}
                     time={recipe.readyInMinutes}
                     image={recipe.image}
                     vegan={recipe.vegan} />

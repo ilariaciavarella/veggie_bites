@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/esm/Form';
 
 export default function VeganFriendlyFilter() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [checked, setChecked] = useState(searchParams.get('veganFriendly') !== 'false');
+    const [checked, setChecked] = useState(searchParams.get('veganFriendly') === 'true');
 
     function handleFilterChange() {
         setChecked(prev => !prev);
