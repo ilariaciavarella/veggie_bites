@@ -5,7 +5,6 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Image from 'react-bootstrap/esm/Image';
-import Button from 'react-bootstrap/esm/Button';
 
 import NavigationBar from '../components/navigation-bar/NavigationBar';
 import Footer from '../components/footer/Footer'

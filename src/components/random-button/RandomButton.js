@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/esm/Button';
-import Error from '../../routes/Error';
 
 export default function RandomButton() {
     const navigate = useNavigate();
