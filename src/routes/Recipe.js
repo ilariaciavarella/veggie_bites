@@ -13,6 +13,7 @@ import Spinner from 'react-bootstrap/esm/Spinner';
 
 import RecipeCardSmall from '../components/recipe-cards/RecipeCardSmall';
 import fallbackImage from '../assets/utilities/fallbackImage';
+import removeHTMLTags from '../assets/utilities/htmlTagsRemover';
 
 export async function loader({ params }) {
     const client = axios.create({
@@ -41,21 +42,21 @@ export default function Recipe() {
         )
     })
 
-    const ingredients = recipe.extendedIngredients.map(ingredient => {
+    const ingredients = (recipe.extendedIngredients.map(ingredient => {
         return (
             <li key={ingredient.id}>{ingredient.original.slice(0, 1).toUpperCase() + ingredient.original.slice(1)}</li>
         )
-    })
+    })) || 'No ingredients found'
 
-    const instructions = recipe.analyzedInstructions[0].steps.map(instruction => {
+    const instructions = (recipe.analyzedInstructions[0].steps.map(instruction => {
         return (
             <li key={instruction.number}>{instruction.step}</li>
         )
-    })
+    })) || 'Not instructions available'
 
     const similarRecipesCards = similar.map(similarRecipe => {
         return (
-            <Col xs={6} md={3} className='px-1' key={similarRecipe.id}>
+            <Col xs={12} sm={6} md={3} className='px-1' key={similarRecipe.id}>
                 <RecipeCardSmall
                     recipeId={similarRecipe.id}
                     image={`https://img.spoonacular.com/recipes/${similarRecipe.id}-312x231.${similarRecipe.imageType}`}
@@ -65,13 +66,13 @@ export default function Recipe() {
     })
 
     return (
-        <main className='py-md-5 py-4 px-2 mx-auto' style={{ maxWidth: '1200px' }}>
+        <main className='py-md-5 py-4 px-2 mx-auto vw-100 overflow-hidden' style={{ maxWidth: '1200px' }}>
             {navigation.state === 'loading' ?
                 <Spinner animation='border' variant='primary' className='mx-auto' /> :
                 <Container fluid className='p-0'>
                     <Container fluid className='pb-3 border-bottom border-primary border-opacity-25'>
                         <h1>{recipe.title}</h1>
-                        <Stack direction='horizontal' gap={1}>
+                        <Stack direction='horizontal' gap={1} className='mw-100 flex-wrap'>
                             {recipe.vegan && <Badge pill bg='tertiary' >Vegan friendly</Badge>}
                             {dishTypesBadges}
                         </Stack>
@@ -90,7 +91,7 @@ export default function Recipe() {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
+                                    <p>{removeHTMLTags(recipe.summary)}</p>
                                 </Row>
                             </Col>
                             <Col xs={12} md={6} >
