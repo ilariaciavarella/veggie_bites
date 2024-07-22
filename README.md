@@ -49,6 +49,14 @@ To run this project, you will need:
    ```
    npm install
    ```
+4. Add an `.env` file to your folder that will contain:
+   - The base API url: https://api.spoonacular.com/recipes/
+   - Your API Key that you can get on the Spoonacular website
+   ```
+   REACT_APP_API_KEY = *Your Api Key*
+   REACT_APP_API_BASE_URL = "https://api.spoonacular.com/recipes/"
+   ```
+   **Note:** the variables names must be exactly these ones.
 
 ### Usage
 
@@ -59,12 +67,10 @@ To open the app in your web browser, you have two options based on your goal:
    npm start
    ```
 2. Or, you can create the production build
-   `    npm run build
-   `
+   `   npm run build`
    Then, run the build
-   `    npm install -g serve
-    serve -s build
-   `
+   `   npm install -g serve
+ serve -s build`
    Once you have chosen your preferred way, you can start exploring the web app:
 3. **Search**: Type your query in the search bar and press Enter or click the submit button.
 4. **Browse recipes**: Explore the collection of recipes matching your search.
