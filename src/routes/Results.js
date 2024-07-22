@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -36,10 +36,6 @@ export async function loader({ request }) {
 export default function Results() {
     const navigation = useNavigation();
     const { query, results, numberOfResults } = useLoaderData();
-
-    useEffect(() => {
-        console.log(results);
-    }, [])
 
     const recipesItems = results.map(recipe => {
         return (
