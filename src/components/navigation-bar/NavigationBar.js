@@ -21,7 +21,7 @@ export default function NavigationBar(props) {
             {props.searchBar && <Navbar.Toggle aria-controls='basic-navbar-nav' />}
             {props.searchBar &&
                 <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end py-2'>
-                    <SearchBar size='sm' color='primary' />
+                    <SearchBar color='primary' />
                 </Navbar.Collapse>
             }
         </Navbar >

@@ -18,18 +18,26 @@ export default function SearchBar(props) {
     function handleQuerySubmit(e) {
         e.preventDefault();
         if (query.match(/^[a-zA-Z0-9-]+(?:\s+[a-zA-Z0-9-]+)*$/)) {
-            localStorage.setItem('storedQuery', query);
-            navigate(`/results?search=${query}&veganFriendly=false&page=1`)
+            localStorage.setItem('storedQuery', query.trim());
+            navigate(`/results?search=${query.trim()}&veganFriendly=false&page=1`)
         } else {
             setIsFormInvalid(true)
         }
+    }
+
+    let inputClass = 'form-control';
+    if (isFormInvalid) {
+        inputClass += ' is-invalid'
+    }
+    if (props.size) {
+        inputClass += ` form-control-${props.size}`
     }
 
     return (
         <Form className='d-flex gap-2' role='search' id='search-form' onSubmit={handleQuerySubmit}>
             <InputGroup>
                 <input
-                    className={!isFormInvalid ? `form-control form-control-${props.size}` : `form-control form-control-${props.size} is-invalid`}
+                    className={inputClass}
                     name='search'
                     type='search'
                     placeholder='&ldquo;Carrot cake&rdquo;'
